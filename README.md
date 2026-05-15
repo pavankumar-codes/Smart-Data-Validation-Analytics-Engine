@@ -48,11 +48,13 @@ employees = [
 
 ]
 
+```
 
 ## Example Output
 
+```
 Valid Employees: 2
 Invalid Employees: 1
 Duplicate IDs Found: 1
 Average Salary: 60000
-
+```
