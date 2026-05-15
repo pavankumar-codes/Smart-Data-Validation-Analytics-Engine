@@ -53,8 +53,8 @@ employees = [
 ## Example Output
 
 ```
-Valid Employees: 2
-Invalid Employees: 1
+Valid Employees: 1
+Invalid Employees: 2
 Duplicate IDs Found: 1
-Average Salary: 60000
+Average Salary: 50000
 ```
