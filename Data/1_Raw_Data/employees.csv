@@ -1,0 +1,22 @@
+id,name,salary,department,experience
+1,Pavan,50000,IT,2
+2,,abc,HR,3
+3,Arun,70000,Finance,5
+4,Kiran,-2000,IT,1
+5,Meena,65000,HR,4
+1,Rahul,80000,Finance,6
+6,Sneha,55000,,2
+7,Vijay,not_available,IT,3
+8,Anu,72000,Marketing,5
+9,Ravi,45000,IT,-1
+10,Divya,60000,HR,4
+11,Akash,0,Finance,2
+12,   ,52000,IT,3
+13,Nithin,90000,Management,8
+14,Priya,75000,HR,5
+15,Karthik,30000,Support,1
+16,Sanjay,85000,Finance,7
+17,Latha,65000,IT,4
+18,Ramesh,invalid,Sales,2
+19,Keerthi,48000,Sales,3
+20,Mohan,120000,Management,10
