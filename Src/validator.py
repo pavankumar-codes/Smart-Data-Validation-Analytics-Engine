@@ -78,14 +78,18 @@ def validate_id(id):
     id=id.strip()
 
     if id=="":
-        return "Id Should Not Be Empty"
-    if id[0]=="-":
-        return "Id should not be negative"
-    if id=="0":
-        return "Id cannot be Zero"
+        return "Id Cannot be empty"
+    
     if not id.isdigit():
-        return "Id cannot be alphabets"
-    return None
+        return "Id can only be in Integer Format"
+    
+    try:
+        id=int(id)
+    except ValueError:
+        return "Id Should Be Integer format"
+    
+    if id<0:
+        return "Id Cannot Be Negative"
 
 def validate_duplicate_id(id):
     hashtable=dict()
@@ -94,9 +98,52 @@ def validate_duplicate_id(id):
     duplicate_id=[num for num,count in hashtable.items() if count>1]
     unique_id=[num for num,count in hashtable.items() if count==1]
 
-    return duplicate_id,unique_id
+    return duplicate_id
 
 
+def validate_salary(salary):
+    if not isinstance(salary,str):
+        return "Salary should be in String format but Integer values"
+    
+    salary=salary.replace(",","")
+
+    if salary=="" or None:
+        return "Salary should not be empty"
+    
+    if salary.count(".")>1:
+        return "Invalid Salary Format"
+    
+    try:
+        salary=float(salary)
+    except ValueError:
+        return "Invalid Salary Format"
+    
+    if salary<0:
+        return "Salary Cannot be Negative"
+    return None
+
+
+
+def validate_experience(experience):
+    if not isinstance(experience,str):
+        return "Experience should be in String"
+    experience=experience.strip()
+
+    if experience=="":
+        return "Experience should not be empty"
+    
+    if experience.count(".")>1:
+        return "Experience in invalid format"
+    
+    try:
+        experience=float(experience)
+    except ValueError:
+        return " Experience should be in Floating Values"
+    
+    if experience<0:
+        return "experience cannot be negative"
+    return None
+    
 
 
             
