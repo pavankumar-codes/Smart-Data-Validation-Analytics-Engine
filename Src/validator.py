@@ -143,7 +143,22 @@ def validate_experience(experience):
     if experience<0:
         return "experience cannot be negative"
     return None
+
+def validate_department(department):
+    if not isinstance(department,str):
+        return "Department Should Be String"
+    department=department.strip().upper()
+    department=department.replace(" ","")
+
+    if department=="":
+        return "Department Should Not Be Empty"
     
+    if not department.isalpha():
+        return "Department should only be in Alphabets"
+    
+    if department not in {"HR","IT","SALES","FINANCE"}:
+        return "Unknown Department"
+
 
 
             

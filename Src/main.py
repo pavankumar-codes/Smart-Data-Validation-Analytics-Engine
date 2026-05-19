@@ -1,5 +1,5 @@
 import csv
-from validator import validate_name,validate_id,validate_duplicate_id,validate_salary,validate_experience
+from validator import validate_name,validate_id,validate_duplicate_id,validate_salary,validate_experience,validate_department
 
 
 employee_data_path = r"C:\20LPA\Smart-Data-Validation-Analytics-Engine\Data\1_Raw_Data\employees.csv"
@@ -15,6 +15,7 @@ valid_id=[]
 
 salary_validation=[]
 experience_validation=[]
+department_validation=[]
 
 for employee in data:
 
@@ -35,6 +36,12 @@ for employee in data:
     experience_validation_data=validate_experience(employee["experience"])
     experience_validation.append([employee["experience"],experience_validation_data])
 
+    department_validation_data=validate_department(employee["department"])
+    department_validation.append([employee["department"],department_validation_data])
+
+
+
+
 
 
 
@@ -48,7 +55,7 @@ invalid_names=[emp[0] for emp in name_validation if emp[1] is not None]
 
 id_duplicate_data=validate_duplicate_id(valid_id)
 
-print(experience_validation)
+print(department_validation)
 
 
 
