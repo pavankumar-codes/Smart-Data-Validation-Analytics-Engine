@@ -1,36 +1,40 @@
+# =========================
+# validator.py
+# =========================
+
 def validate_name(name):
 
-    errorbit = ""
+    errors = []
 
     # Datatype Validation
     if not isinstance(name, str):
 
-        return " - Name should be string datatype"
+        return ["Name should be string datatype"]
 
-    # Remove Leading & Trailing Spaces
+    # Remove Spaces
     name = name.strip()
 
-    # Empty Name Validation
+    # Empty Validation
     if name == "":
 
-        errorbit += " - Empty Name \n "
+        errors.append("Empty Name")
 
     # Minimum Length Validation
-    if len(name) < 2:
+    if len(name) <= 2:
 
-        errorbit += " - Name does not meet minimum length requirement \n "
+        errors.append("Name does not meet minimum length requirement")
 
     # Maximum Length Validation
     if len(name) > 100:
 
-        errorbit += " - Name exceeded maximum length \n "
+        errors.append("Name exceeded maximum length")
 
-    # Fake/Placeholder Value Validation
+    # Fake Placeholder Validation
     if name.upper() in ["NA", "N/A", "NULL", "UNKNOWN", "TEST"]:
 
-        errorbit += " - Invalid placeholder name detected \n "
+        errors.append("Invalid placeholder name detected")
 
-    # Character-Level Validation
+    # Character Validation
     reject_digit_flag = False
     reject_special_flag = False
 
@@ -46,7 +50,7 @@ def validate_name(name):
 
             if not reject_digit_flag:
 
-                errorbit += " - Name should not contain digits \n "
+                errors.append("Name should not contain digits")
 
                 reject_digit_flag = True
 
@@ -55,113 +59,202 @@ def validate_name(name):
 
             if not reject_special_flag:
 
-                errorbit += " - Name should not contain special characters \n"
+                errors.append("Name should not contain special characters")
 
                 reject_special_flag = True
 
-        # Stop Loop If Both Errors Already Found
+        # Stop Early If Both Errors Found
         if reject_digit_flag and reject_special_flag:
 
             break
 
-    # Final Validation Result
-    if errorbit == "":
-
-        return None
-
-    return errorbit
+    return errors if errors else None
 
 
-def validate_id(id):
-    if not isinstance(id,str):
-        return "Id Should Be Integer in String DataType"
-    id=id.strip()
+# =====================================
 
-    if id=="":
-        return "Id Cannot be empty"
-    
-    if not id.isdigit():
-        return "Id can only be in Integer Format"
-    
-    try:
-        id=int(id)
-    except ValueError:
-        return "Id Should Be Integer format"
-    
-    if id<0:
-        return "Id Cannot Be Negative"
+def validate_id(emp_id):
 
-def validate_duplicate_id(id):
-    hashtable=dict()
-    for num in id:
-        hashtable[num]=hashtable.get(num,0)+1
-    duplicate_id=[num for num,count in hashtable.items() if count>1]
-    unique_id=[num for num,count in hashtable.items() if count==1]
+    errors = []
 
-    return duplicate_id
+    # Datatype Validation
+    if not isinstance(emp_id, str):
 
+        return ["ID should be string datatype"]
+
+    emp_id = emp_id.strip()
+
+    # Empty Validation
+    if emp_id == "":
+
+        errors.append("ID cannot be empty")
+
+        return errors
+
+    # Numeric Validation
+    if not emp_id.isdigit():
+
+        errors.append("ID should contain only digits")
+
+        return errors
+
+    # Integer Conversion
+    emp_id = int(emp_id)
+
+    # Positive Validation
+    if emp_id <= 0:
+
+        errors.append("ID cannot be negative or zero")
+
+    return errors if errors else None
+
+
+# =====================================
+
+def validate_duplicate_id(employee_ids):
+
+    hash_table = {}
+
+    for emp_id in employee_ids:
+
+        hash_table[emp_id] = hash_table.get(emp_id, 0) + 1
+
+    duplicate_ids = [
+
+        emp_id
+
+        for emp_id, count in hash_table.items()
+
+        if count > 1
+    ]
+
+    return duplicate_ids
+
+
+# =====================================
 
 def validate_salary(salary):
-    if not isinstance(salary,str):
-        return "Salary should be in String format but Integer values"
-    
-    salary=salary.replace(",","")
 
-    if salary=="" or None:
-        return "Salary should not be empty"
-    
-    if salary.count(".")>1:
-        return "Invalid Salary Format"
-    
+    errors = []
+
+    # Datatype Validation
+    if not isinstance(salary, str):
+
+        return ["Salary should be string datatype"]
+
+    salary = salary.replace(",", "").strip()
+
+    # Empty Validation
+    if salary == "":
+
+        errors.append("Salary should not be empty")
+
+        return errors
+
+    # Decimal Validation
+    if salary.count(".") > 1:
+
+        errors.append("Invalid salary format")
+
+    # Numeric Conversion
     try:
-        salary=float(salary)
+
+        salary = float(salary)
+
     except ValueError:
-        return "Invalid Salary Format"
-    
-    if salary<0:
-        return "Salary Cannot be Negative"
-    return None
+
+        errors.append("Salary should be numeric")
+
+        return errors
+
+    # Business Validation
+    if salary <= 0:
+
+        errors.append("Salary cannot be negative or zero")
+
+    return errors if errors else None
 
 
+# =====================================
 
 def validate_experience(experience):
-    if not isinstance(experience,str):
-        return "Experience should be in String"
-    experience=experience.strip()
 
-    if experience=="":
-        return "Experience should not be empty"
-    
-    if experience.count(".")>1:
-        return "Experience in invalid format"
-    
+    errors = []
+
+    # Datatype Validation
+    if not isinstance(experience, str):
+
+        return ["Experience should be string datatype"]
+
+    experience = experience.strip()
+
+    # Empty Validation
+    if experience == "":
+
+        errors.append("Experience should not be empty")
+
+        return errors
+
+    # Decimal Validation
+    if experience.count(".") > 1:
+
+        errors.append("Invalid experience format")
+
+    # Numeric Conversion
     try:
-        experience=float(experience)
+
+        experience = float(experience)
+
     except ValueError:
-        return " Experience should be in Floating Values"
-    
-    if experience<0:
-        return "experience cannot be negative"
-    return None
+
+        errors.append("Experience should be numeric")
+
+        return errors
+
+    # Business Validation
+    if experience < 0:
+
+        errors.append("Experience cannot be negative")
+
+    return errors if errors else None
+
+
+# =====================================
 
 def validate_department(department):
-    if not isinstance(department,str):
-        return "Department Should Be String"
-    department=department.strip().upper()
-    department=department.replace(" ","")
 
-    if department=="":
-        return "Department Should Not Be Empty"
-    
-    if not department.isalpha():
-        return "Department should only be in Alphabets"
-    
-    if department not in {"HR","IT","SALES","FINANCE"}:
-        return "Unknown Department"
+    errors = []
 
+    # Datatype Validation
+    if not isinstance(department, str):
 
+        return ["Department should be string datatype"]
 
-            
+    department = department.strip().upper()
 
-    
-    
+    # Empty Validation
+    if department == "":
+
+        errors.append("Department should not be empty")
+
+        return errors
+
+    # Character Validation
+    if not department.replace(" ", "").isalpha():
+
+        errors.append("Department should contain only alphabets")
+
+    # Domain Validation
+    valid_departments = {
+
+        "HR",
+        "IT",
+        "SALES",
+        "FINANCE"
+    }
+
+    if department not in valid_departments:
+
+        errors.append("Unknown Department")
+
+    return errors if errors else None
