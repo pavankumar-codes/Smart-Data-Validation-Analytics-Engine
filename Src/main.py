@@ -14,6 +14,15 @@ from validator import (
     validate_department
 )
 
+from cleaner import (
+    name_cleaner,
+    employee_id_cleaner,
+    salary_cleaner,
+    department_cleaner,
+    experience_cleaner
+    )
+
+
 # CSV File Path
 employee_data_path = r"C:\20LPA\Smart-Data-Validation-Analytics-Engine\Data\1_Raw_Data\employees.csv"
 
@@ -138,3 +147,61 @@ for item in invalid_data:
     print("\n-------------------------------------------\n")
 
 print("Total Invalid Records :", len(invalid_data))
+
+print("\n-------------------------------------------\n")
+
+#Store Final Cleaned Valid Data
+cleaned_valid_data=[]
+
+
+
+for employee in valid_data:
+
+    #Cleaned Employee Information In Dict
+    cleaned_employee_info=dict()
+
+    #Extract Fields
+    employee_name=employee["name"]
+
+    employee_id=employee["id"]
+
+    employee_salary=employee["salary"]
+
+    employee_department=employee["department"]
+
+    employee_experience=employee["experience"]
+
+
+    #Cleaning Data
+    cleaned_employee_name=name_cleaner(employee_name)
+
+    cleaned_employee_id=employee_id_cleaner(employee_id)
+
+    cleaned_employee_salary=salary_cleaner(employee_salary)
+
+    cleaned_employee_department=department_cleaner(employee_department)
+
+    cleaned_employee_experience=experience_cleaner(employee_experience)
+
+    #Adding Information as Dictionary
+    cleaned_employee_info["id"]=cleaned_employee_id
+
+    cleaned_employee_info["name"]=cleaned_employee_name
+
+    cleaned_employee_info["salary"]=cleaned_employee_salary
+
+    cleaned_employee_info["department"]=cleaned_employee_department
+
+    cleaned_employee_info["experience"]=cleaned_employee_experience
+
+    #Appending Cleaned Valid Data To a List
+    cleaned_valid_data.append(cleaned_employee_info)
+
+
+print("\n================ CLEANED VALID RECORDS ================\n")
+
+for employee in cleaned_valid_data:
+    print("Employee Record : ")
+    print(employee)
+    print("\n")
+

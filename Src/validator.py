@@ -83,6 +83,7 @@ def validate_id(emp_id):
         return ["ID should be string datatype"]
 
     emp_id = emp_id.strip()
+    emp_id = emp_id.replace(" ","")
 
     # Empty Validation
     if emp_id == "":
@@ -142,7 +143,7 @@ def validate_salary(salary):
 
         return ["Salary should be string datatype"]
 
-    salary = salary.replace(",", "").strip()
+    salary = salary.replace(" ", "").strip()
 
     # Empty Validation
     if salary == "":
@@ -187,6 +188,7 @@ def validate_experience(experience):
         return ["Experience should be string datatype"]
 
     experience = experience.strip()
+    experience=experience.replace(" ","")
 
     # Empty Validation
     if experience == "":
