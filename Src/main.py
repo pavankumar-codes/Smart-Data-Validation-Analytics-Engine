@@ -22,6 +22,22 @@ from cleaner import (
     experience_cleaner
     )
 
+from filters import (
+    high_salary_employees,
+    very_high_salary_employees,
+    low_salary_employees,
+    department_filter_employees,
+    experience_filter_employees,
+    high_salary_it_employees,
+    experienced_finance_employees,
+    junior_hr_employees,
+    employees_above_average_salary,
+    employees_below_average_salary,
+    employee_search_by_id,
+    employee_search_by_name,
+    employee_search_with_exact_experience
+)
+
 
 # CSV File Path
 employee_data_path = r"C:\20LPA\Smart-Data-Validation-Analytics-Engine\Data\1_Raw_Data\employees.csv"
@@ -204,4 +220,56 @@ for employee in cleaned_valid_data:
     print("Employee Record : ")
     print(employee)
     print("\n")
+
+#High Salary Employees Data
+high_salary_employees_data=high_salary_employees(cleaned_valid_data)
+
+#Very High Salary Employees Data
+very_high_salary_employees_data=very_high_salary_employees(cleaned_valid_data)
+
+#Low Salary Employees Data
+low_salary_employees_data=low_salary_employees(cleaned_valid_data)
+
+
+#Employees by department
+employees_by_department_data=department_filter_employees(cleaned_valid_data)
+
+#Employees by Experience
+employees_by_experience_data=experience_filter_employees(cleaned_valid_data)
+
+#High Salary IT employees
+high_salary_it_employees_data=high_salary_it_employees(high_salary_employees_data)
+
+#Experienced Finance Employees
+experienced_finance_employees_data=experienced_finance_employees(cleaned_valid_data)
+
+#Junior Hr Employees
+junior_hr_employees_data=junior_hr_employees(cleaned_valid_data)
+
+#Employees Above Average Salary
+employees_above_average_salary_data=employees_above_average_salary(cleaned_valid_data)
+
+#Employees Below Average Salary
+employees_below_average_salary_data=employees_below_average_salary(cleaned_valid_data)
+
+#Employee Search By Id
+employee_search_by_id_data=employee_search_by_id(cleaned_valid_data,12)
+
+#Employee Search By Names
+employee_search_by_name_data=employee_search_by_name(cleaned_valid_data,'Sanjay')
+
+#Employees With Exact Experience Condition
+employee_search_with_exact_experience_data=employee_search_with_exact_experience(cleaned_valid_data,5)
+
+
+
+
+
+
+
+
+
+
+
+
 
