@@ -38,6 +38,14 @@ from filters import (
     employee_search_with_exact_experience
 )
 
+from analytics import(
+    department_employee_count,
+    department_experience_mapping,
+    department_salary_mapping,
+    name_mapping,
+    salary_mapping
+)
+
 
 # CSV File Path
 employee_data_path = r"C:\20LPA\Smart-Data-Validation-Analytics-Engine\Data\1_Raw_Data\employees.csv"
@@ -261,8 +269,21 @@ employee_search_by_name_data=employee_search_by_name(cleaned_valid_data,'Sanjay'
 #Employees With Exact Experience Condition
 employee_search_with_exact_experience_data=employee_search_with_exact_experience(cleaned_valid_data,5)
 
+#Analytics
+#Department Employee Counts
+department_employee_count_data=department_employee_count(cleaned_valid_data)
 
+#Salary Mapping
+salary_mapping_data=salary_mapping(cleaned_valid_data)
 
+#Name Mapping
+name_mapping_data=name_mapping(cleaned_valid_data)
+
+#Department Salary Mapping
+department_salary_data=department_salary_mapping(cleaned_valid_data)
+
+#Department Experience Mapping
+department_experience_data=department_experience_mapping(cleaned_valid_data)
 
 
 
