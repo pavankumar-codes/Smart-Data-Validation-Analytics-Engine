@@ -39,11 +39,22 @@ from filters import (
 )
 
 from analytics import(
+    department_analytics_mapping,
     department_employee_count,
     department_experience_mapping,
     department_salary_mapping,
+    department_with_highest_average_salary,
+    department_with_least_employees,
+    department_with_lowest_average_salary,
+    department_with_most_employees,
+    highest_paid_employee,
+    least_experienced_employee,
+    lowest_paid_employee,
+    most_experienced_employee,
     name_mapping,
-    salary_mapping
+    salary_distribution_analytics,
+    salary_mapping,
+    kpi_mapping 
 )
 
 
@@ -284,6 +295,163 @@ department_salary_data=department_salary_mapping(cleaned_valid_data)
 
 #Department Experience Mapping
 department_experience_data=department_experience_mapping(cleaned_valid_data)
+
+#Kpi Data
+kpi_data=kpi_mapping(cleaned_valid_data)
+
+#Department Analytics Data
+department_analytics_data=department_analytics_mapping(cleaned_valid_data)
+
+#Highest Paid Employees
+highest_paid_employee_data=highest_paid_employee(cleaned_valid_data)
+
+#Least Paid Employees
+lowest_paid_employee_data=lowest_paid_employee(cleaned_valid_data)
+
+#Most Experienced Employee
+most_experienced_employee_data=most_experienced_employee(cleaned_valid_data)
+
+#Least Experienced Employee
+least_experienced_employee_data=least_experienced_employee(cleaned_valid_data)
+
+#Department With Highest Average Salary
+department_with_highest_average_salary_data=department_with_highest_average_salary(cleaned_valid_data)
+
+#Department With Lowest Average Salary
+department_with_lowest_average_salary_data=department_with_lowest_average_salary(cleaned_valid_data)
+
+#Department with Most Employees
+department_with_most_employees_data=department_with_most_employees(cleaned_valid_data)
+
+#Department with Least Employees
+department_with_least_employees_data=department_with_least_employees(cleaned_valid_data)
+
+#Salary Distribution Analytics
+salary_distribution_analytics_data=salary_distribution_analytics(cleaned_valid_data,30000,90000)
+
+
+
+def analytics_report():
+   
+   
+   global_kpi_analytics = kpi_mapping(cleaned_valid_data)
+   
+   print("=========================\n")
+
+   print("GLOBAL KPI REPORT\n")
+
+   print("=========================\n")
+   
+   for key,value in global_kpi_analytics.items():
+       print(key ," : " , value)
+
+   print("\n=========================\n")
+
+   print("DEPARTMENT ANALYTICS REPORT\n")
+
+   print("=========================\n")
+
+   department_analytics_insights=department_analytics_mapping(cleaned_valid_data) 
+
+  
+
+   for key,value in department_analytics_insights.items():
+       print("Department : ",key)
+       print("Employee Count : ",value['employee_count'])
+       print("Average Salary: ",value['average_salary'])
+       print("Highest Salary : ",value['highest_salary'])
+       print("Lowest Salary : ",value['lowest_salary'])
+       print("Average Experience : ",value['average_experience'])
+       print("\n")
+    
+   print("\n=========================\n")
+
+   print("BUSINESS INSIGHTS REPORT\n")
+
+   print("=========================\n")
+
+   #Highest Paid Employees
+   highest_paid_employee_data=highest_paid_employee(cleaned_valid_data)
+
+   print("Highest Paid Employee : ")
+   for emp in highest_paid_employee_data:
+       print(emp)
+   
+   print("\n")
+   #Least Paid Employees
+   lowest_paid_employee_data=lowest_paid_employee(cleaned_valid_data)
+   print("Lowest Paid Employee : ")
+   for emp in lowest_paid_employee_data:
+       print(emp)
+   print("\n")
+
+   #Most Experienced Employee
+   most_experienced_employee_data=most_experienced_employee(cleaned_valid_data)
+   print("Most Experienced Employee : ")
+   for emp in most_experienced_employee_data:
+       print(emp)
+   print("\n")
+
+   #Least Experienced Employee
+   least_experienced_employee_data=least_experienced_employee(cleaned_valid_data)
+   print("Least Experienced Employee : ")
+   for emp in least_experienced_employee_data:
+       print(emp)
+   print("\n")
+   
+       
+   print("\n=========================\n")
+
+   print("DEPARTMENT INSIGHTS REPORT\n")
+
+   print("=========================\n")
+
+   #Department With Highest Average Salary
+   department_with_highest_average_salary_data=department_with_highest_average_salary(cleaned_valid_data)
+   print("Department With Highest Average Salary : ")
+   for department in department_with_highest_average_salary_data:
+       print(department)
+   print("\n")
+
+   #Department With Lowest Average Salary
+   department_with_lowest_average_salary_data=department_with_lowest_average_salary(cleaned_valid_data)
+   print("Department With Lowest Average Salary : ")
+   for department in department_with_lowest_average_salary_data:
+       print(department)
+
+   print("\n")
+   #Department with Most Employees
+   department_with_most_employees_data=department_with_most_employees(cleaned_valid_data)
+   print("Department With Most Employees : ")
+   for department in department_with_most_employees_data:
+       print(department)
+
+   print("\n")
+
+   #Department with Least Employees
+   department_with_least_employees_data=department_with_least_employees(cleaned_valid_data)
+   print("Department With Least Employees : ")
+   for department in department_with_least_employees_data:
+       print(department)
+
+
+   print("\n=========================\n")
+
+   print("SALARY DISTRIBUTION REPORT\n")
+
+   print("=========================\n")
+
+   #Salary Distribution Analytics
+   salary_distribution_analytics_data=salary_distribution_analytics(cleaned_valid_data,30000,90000)
+   for key,value in salary_distribution_analytics_data.items():
+       print(key," : ",len(value))
+       for emp in value:
+           print(emp)
+
+   print("\n")
+
+
+analytics_report()
 
 
 
