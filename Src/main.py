@@ -4,6 +4,19 @@
 
 import csv
 
+from sorting_searching import (
+    bottom_n_paid_employees,
+    multi_key_sort_department_experience, 
+    multi_key_sort_department_salary_experience,
+    search_by_department,
+    search_by_experience_range,
+    search_by_salary_range, 
+    sort_by_experience, 
+    sort_by_name, 
+    sort_by_salary,
+    top_n_highest_paid_employees,
+    top_n_most_experienced_employees
+)
 from validator import (
 
     validate_name,
@@ -453,6 +466,21 @@ def analytics_report():
 
 analytics_report()
 
+
+#Sorting and Searching
+sort_by_salary_data=sort_by_salary(cleaned_valid_data,True)
+sort_by_name_data=sort_by_name(cleaned_valid_data,False)
+sort_by_experience_data=sort_by_experience(cleaned_valid_data,False)
+multi_key_sort_department_experience_data=multi_key_sort_department_experience(cleaned_valid_data,False)
+multi_key_sort_department_salary_experience_data=multi_key_sort_department_salary_experience(cleaned_valid_data,False)
+
+search_by_department_data=search_by_department(cleaned_valid_data,'HR')
+search_by_salary_range_data=search_by_salary_range(cleaned_valid_data,25000,90000)
+search_by_experience_range_data=search_by_experience_range(cleaned_valid_data,5,12)
+
+top_n_highest_paid_employees_data=top_n_highest_paid_employees(cleaned_valid_data,3)
+bottom_n_paid_employees_data=bottom_n_paid_employees(cleaned_valid_data,3)
+top_n_most_experienced_employees_data=top_n_most_experienced_employees(cleaned_valid_data,3)
 
 
 
