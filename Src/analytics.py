@@ -42,7 +42,10 @@ def kpi_mapping(employee):
 
     total_salary=0
     total_experience=0
+    if len(employee)==0:
+        raise ValueError("Employee Dataset Is Empty")
     empl=employee[0]
+    print("Employee DataSet Is Empty")
     highest_salary=empl['salary']
     lowest_salary=empl['salary']
     highest_experience=empl['experience']
@@ -63,9 +66,8 @@ def kpi_mapping(employee):
         if lowest_experience>emp['experience']:
             lowest_experience=emp['experience']
         
-
-    average_salary=total_salary/total_employees
-    average_experience=total_experience/total_employees
+        average_salary=total_salary/total_employees
+        average_experience=total_experience/total_employees
 
     hashmap['total_employees']=total_employees
     hashmap['highest_salary']=highest_salary
@@ -77,6 +79,9 @@ def kpi_mapping(employee):
     return hashmap
 
 def department_analytics_mapping(employee):
+
+    if len(employee)==0:
+        raise ValueError("Employee DataSet is Empty")
 
     department_wise_employee_count=department_employee_count(employee)
 
@@ -189,6 +194,13 @@ def department_with_least_employees(employee):
     return department_with_least_employees_data
 
 def salary_distribution_analytics(employee,lowsalary,highsalary):
+    if len(employee)==0:
+        raise ValueError("DataSet Is Empty")
+    if (lowsalary>highsalary):
+        raise ValueError("Low Salary is greater than high salary")
+    if ((lowsalary<=0) or (highsalary<=0)):
+        raise ValueError("Salary cannot be negative")
+
     hashmap=dict()
     hashmap['low_salary_employees']=[]
     hashmap['mid_salary_employees']=[]

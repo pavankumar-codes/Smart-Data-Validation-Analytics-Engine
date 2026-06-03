@@ -1,4 +1,9 @@
 def sort_by_salary(employee,order):
+    if len(employee)==0:
+       raise ValueError("DataSet is Empty")
+    if not isinstance(order,bool):
+       raise ValueError("order should be boolean")
+       
     return sorted(employee,key=lambda x:x['salary'],reverse=order)
 
 
