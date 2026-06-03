@@ -1,5 +1,10 @@
+from exceptions import InvalidDatasetError, InvalidInputError, InvalidRangeError
+
+
 def high_salary_employees(employee):
     #Salary Threshold for High Salary Employees
+    if len(employee)==0:
+        raise InvalidDatasetError("Dataset is Empty")
     salary_threshold=50000
 
     #Iterating through each employee and filtering out high paying employees
@@ -8,6 +13,8 @@ def high_salary_employees(employee):
     return high_salary_employees_data
 
 def very_high_salary_employees(employee):
+    if len(employee)==0:
+        raise InvalidDatasetError("Dataset is Empty")
     #Salary Threshold for High Salary Employees
     salary_threshold=90000
 
@@ -17,6 +24,8 @@ def very_high_salary_employees(employee):
     return very_high_salary_employees_data
 
 def low_salary_employees(employee):
+    if len(employee)==0:
+        raise InvalidDatasetError("Dataset is Empty")
     #salary Threshold
     salary_threshold=30000
 
@@ -26,6 +35,8 @@ def low_salary_employees(employee):
     return low_salary_employees_data
 
 def department_filter_employees(employee):
+    if len(employee)==0:
+        raise InvalidDatasetError("Dataset is Empty")
 
     hashset=set()
     for emp in employee:
@@ -40,6 +51,8 @@ def department_filter_employees(employee):
     return hashmap
 
 def experience_filter_employees(employee):
+    if len(employee)==0:
+        raise InvalidDatasetError("Dataset is Empty")
 
     hashmap=dict()
 
@@ -55,24 +68,32 @@ def experience_filter_employees(employee):
     return hashmap
 
 def high_salary_it_employees(employee):
+    if len(employee)==0:
+        raise InvalidDatasetError("Dataset is Empty")
 
     list_of_high_salary_it_employees=[emp for emp in employee if emp['department']=="IT"]
 
     return list_of_high_salary_it_employees
 
 def experienced_finance_employees(employee):
+    if len(employee)==0:
+        raise InvalidDatasetError("Dataset is Empty")
 
     list_of_experienced_finance_employees_data=[emp for emp in employee if emp['department']=='FINANCE' and emp['experience']>=5]
 
     return list_of_experienced_finance_employees_data
 
 def junior_hr_employees(employee):
+    if len(employee)==0:
+        raise InvalidDatasetError("Dataset is Empty")
 
     junior_hr_employees_data=[emp for emp in employee if emp['department']=='HR' and emp['experience']<=3]
 
     return junior_hr_employees_data
 
 def employees_above_average_salary(employee):
+    if len(employee)==0:
+        raise InvalidDatasetError("Dataset is Empty")
     
     total_employees_salary=0
     total_employees_count=0
@@ -88,6 +109,8 @@ def employees_above_average_salary(employee):
     return employees_above_average_salary_data
 
 def employees_below_average_salary(employee):
+    if len(employee)==0:
+        raise InvalidDatasetError("Dataset is Empty")
     
     total_employees_salary=0
     total_employees_count=0
@@ -103,12 +126,25 @@ def employees_below_average_salary(employee):
     return employees_below_average_salary_data
 
 def employee_search_by_id(employee,employee_id):
+    if len(employee)==0:
+        raise InvalidDatasetError("Dataset is Empty")
+    if not isinstance(employee_id,int):
+        raise InvalidInputError("ID Should Be Integer")
+    if employee_id<=0:
+        raise InvalidRangeError("Employee Id Cannot Be Negavtive or zero")
 
     employee_search_by_id_data=[emp for emp in employee if employee_id==emp['id']]
 
     return employee_search_by_id_data
 
 def employee_search_by_name(employee,employee_name):
+    if len(employee)==0:
+        raise InvalidDatasetError("Dataset is Empty")
+    if not isinstance(employee_name,str):
+        raise InvalidInputError("Name Should Be String")
+    if employee_name.strip()=="":
+        raise InvalidInputError("Name Should Not Be Empty")
+
 
     employee_name=employee_name.lower()
 
@@ -117,6 +153,11 @@ def employee_search_by_name(employee,employee_name):
     return employee_search_by_name_data
 
 def employee_search_with_exact_experience(employee,experience):
+    if len(employee)==0:
+        raise InvalidDatasetError("Dataset is Empty")
+    
+    if experience<0:
+        raise InvalidRangeError("Experience Cannot be Negative")
 
     employee_search_with_exact_experience_data=[emp for emp in employee if emp['experience']==experience]
 

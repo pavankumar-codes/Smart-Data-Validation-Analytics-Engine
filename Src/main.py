@@ -4,6 +4,7 @@
 
 import csv
 
+from exceptions import InvalidDatasetError, InvalidInputError, InvalidRangeError
 from sorting_searching import (
     bottom_n_paid_employees,
     multi_key_sort_department_experience, 
@@ -463,8 +464,21 @@ def analytics_report():
 
    print("\n")
 
+try:
 
-analytics_report()
+    analytics_report()
+
+except InvalidDatasetError as e:
+    print(f"Dataset Error : {e}")
+
+except InvalidRangeError as e:
+    print(f"Range Error : {e}")
+
+except InvalidInputError as e:
+    print(f"Input Error : {e}")
+
+except Exception as e:
+    print(f"Unexpected Error : {e}")
 
 
 #Sorting and Searching

@@ -1,3 +1,6 @@
+from exceptions import InvalidDatasetError, InvalidInputError, InvalidRangeError
+
+
 def department_employee_count(employee):
     hashmap=dict()
     for emp in employee:
@@ -43,9 +46,8 @@ def kpi_mapping(employee):
     total_salary=0
     total_experience=0
     if len(employee)==0:
-        raise ValueError("Employee Dataset Is Empty")
+        raise InvalidDatasetError("Employee Dataset Is Empty")
     empl=employee[0]
-    print("Employee DataSet Is Empty")
     highest_salary=empl['salary']
     lowest_salary=empl['salary']
     highest_experience=empl['experience']
@@ -81,7 +83,7 @@ def kpi_mapping(employee):
 def department_analytics_mapping(employee):
 
     if len(employee)==0:
-        raise ValueError("Employee DataSet is Empty")
+        raise InvalidDatasetError("Employee DataSet is Empty")
 
     department_wise_employee_count=department_employee_count(employee)
 
@@ -195,11 +197,11 @@ def department_with_least_employees(employee):
 
 def salary_distribution_analytics(employee,lowsalary,highsalary):
     if len(employee)==0:
-        raise ValueError("DataSet Is Empty")
+        raise InvalidDatasetError("DataSet Is Empty")
     if (lowsalary>highsalary):
-        raise ValueError("Low Salary is greater than high salary")
+        raise InvalidInputError("Low Salary is greater than high salary")
     if ((lowsalary<=0) or (highsalary<=0)):
-        raise ValueError("Salary cannot be negative")
+        raise InvalidRangeError("Salary cannot be negative")
 
     hashmap=dict()
     hashmap['low_salary_employees']=[]
