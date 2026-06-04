@@ -1,6 +1,7 @@
 # =========================
 # validator.py
 # =========================
+from logger_config import logger
 
 def validate_name(name):
 
@@ -114,6 +115,8 @@ def validate_id(emp_id):
 
 def validate_duplicate_id(employee_ids):
 
+    logger.info("Starting duplicate employee ID validation")
+
     hash_table = {}
 
     for emp_id in employee_ids:
@@ -128,6 +131,11 @@ def validate_duplicate_id(employee_ids):
 
         if count > 1
     ]
+
+    if len(duplicate_ids)==0:
+        logger.info("No Duplicate Id's Found")
+    else:
+        logger.warning(f"Duplicate employee IDs detected. Count: {len(duplicate_ids)}")
 
     return duplicate_ids
 

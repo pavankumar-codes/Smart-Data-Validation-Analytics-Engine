@@ -1,0 +1,20 @@
+2026-06-05 01:17:01,080 -  INFO - logger_config -  Reading Employee Data From Employee Data path C:\20LPA\Smart-Data-Validation-Analytics-Engine\Data\1_Raw_Data\employees.csv
+2026-06-05 01:17:01,080 -  INFO - logger_config -  Reading Employee Data Successfull with 21 Records
+2026-06-05 01:17:21,187 -  INFO - logger_config -  Reading Employee Data From Employee Data path C:\20LPA\Smart-Data-Validation-Analytics-Engine\Data\1_Raw_Data\eployees.csv
+2026-06-05 01:17:21,187 -  ERROR - logger_config -  Reading Employee Data From Employee Data path is Unsuccessfull [Errno 2] No such file or directory: 'C:\\20LPA\\Smart-Data-Validation-Analytics-Engine\\Data\\1_Raw_Data\\eployees.csv'
+2026-06-05 01:20:00,762 -  INFO - logger_config -  Reading employee data from: C:\20LPA\Smart-Data-Validation-Analytics-Engine\Data\1_Raw_Data\employees.csv
+2026-06-05 01:20:00,762 -  INFO - logger_config -  Employee data loaded successfully. Records loaded: 21
+2026-06-05 01:26:48,341 -  INFO - logger_config -  Reading employee data from: C:\20LPA\Smart-Data-Validation-Analytics-Engine\Data\1_Raw_Data\eployees.csv
+2026-06-05 01:26:48,341 -  ERROR - logger_config -  Failed to read employee data file: [Errno 2] No such file or directory: 'C:\\20LPA\\Smart-Data-Validation-Analytics-Engine\\Data\\1_Raw_Data\\eployees.csv'
+2026-06-05 01:27:48,374 -  INFO - logger_config -  Reading employee data from: C:\20LPA\Smart-Data-Validation-Analytics-Engine\Data\1_Raw_Data\employees.csv
+2026-06-05 01:27:48,374 -  INFO - logger_config -  Employee data loaded successfully. Records loaded: 21
+2026-06-05 01:27:48,374 -  INFO - logger_config -  Started Validating Employee Id's for Duplicate Detection
+2026-06-05 01:27:48,374 -  INFO - logger_config -  Duplicate Id's Found : 1
+2026-06-05 01:30:24,008 -  INFO - logger_config -  Reading employee data from: C:\20LPA\Smart-Data-Validation-Analytics-Engine\Data\1_Raw_Data\employees.csv
+2026-06-05 01:30:24,009 -  INFO - logger_config -  Employee data loaded successfully. Records loaded: 21
+2026-06-05 01:30:24,009 -  INFO - logger_config -  Starting duplicate employee ID validation
+2026-06-05 01:30:24,009 -  WARNING - logger_config -  Duplicate employee IDs detected. Count: 1
+2026-06-05 01:30:41,706 -  INFO - logger_config -  Reading employee data from: C:\20LPA\Smart-Data-Validation-Analytics-Engine\Data\1_Raw_Data\employees.csv
+2026-06-05 01:30:41,706 -  INFO - logger_config -  Employee data loaded successfully. Records loaded: 21
+2026-06-05 01:30:41,706 -  INFO - logger_config -  Starting duplicate employee ID validation
+2026-06-05 01:30:41,706 -  WARNING - logger_config -  Duplicate employee IDs detected. Count: 1

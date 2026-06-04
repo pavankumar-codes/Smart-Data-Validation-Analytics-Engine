@@ -5,6 +5,7 @@
 import csv
 
 from exceptions import InvalidDatasetError, InvalidInputError, InvalidRangeError
+from logger_config import logger
 from sorting_searching import (
     bottom_n_paid_employees,
     multi_key_sort_department_experience, 
@@ -76,11 +77,17 @@ from analytics import(
 employee_data_path = r"C:\20LPA\Smart-Data-Validation-Analytics-Engine\Data\1_Raw_Data\employees.csv"
 
 # Read CSV Data
-with open(employee_data_path, "r") as file:
 
-    reader = csv.DictReader(file)
+try:
+    logger.info(f"Reading employee data from: {employee_data_path}")
+    with open(employee_data_path, "r") as file:
 
-    data = [row for row in reader]
+        reader = csv.DictReader(file)
+        data = [row for row in reader]
+        logger.info(f"Employee data loaded successfully. Records loaded: {len(data)}")
+
+except FileNotFoundError as e:
+    logger.error(f"Failed to read employee data file: {e}")
 
 # Store Final Outputs
 valid_data = []
