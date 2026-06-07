@@ -5,7 +5,8 @@
 import csv
 
 from exceptions import InvalidDatasetError, InvalidInputError, InvalidRangeError
-from logger_config import logger
+import logging
+from logger_config import *
 from sorting_searching import (
     bottom_n_paid_employees,
     multi_key_sort_department_experience, 
@@ -72,7 +73,7 @@ from analytics import(
     kpi_mapping 
 )
 
-
+logger = logging.getLogger(__name__)
 # CSV File Path
 employee_data_path = r"C:\20LPA\Smart-Data-Validation-Analytics-Engine\Data\1_Raw_Data\employees.csv"
 
@@ -88,6 +89,9 @@ try:
 
 except FileNotFoundError as e:
     logger.error(f"Failed to read employee data file: {e}")
+
+
+logger.info("Starting employee data validation")
 
 # Store Final Outputs
 valid_data = []
@@ -124,14 +128,19 @@ for employee in data:
     employee_department = employee["department"]
 
     # Run Validators
+    
     name_errors = validate_name(employee_name)
 
+    
     id_errors = validate_id(employee_id)
 
+    
     salary_errors = validate_salary(employee_salary)
 
+    
     experience_errors = validate_experience(employee_experience)
 
+    
     department_errors = validate_department(employee_department)
 
     # Collect Errors
@@ -186,6 +195,8 @@ for employee in valid_data:
 
 print("\nTotal Valid Records :", len(valid_data))
 
+
+
 print("\n================ INVALID RECORDS ================\n")
 
 for item in invalid_data:
@@ -206,7 +217,12 @@ print("Total Invalid Records :", len(invalid_data))
 
 print("\n-------------------------------------------\n")
 
+logger.info(
+    f"Validation completed. Valid Records: {len(valid_data)}, Invalid Records: {len(invalid_data)}"
+)
+
 #Store Final Cleaned Valid Data
+logger.info("Starting data cleaning for valid records")
 cleaned_valid_data=[]
 
 
@@ -253,6 +269,8 @@ for employee in valid_data:
     #Appending Cleaned Valid Data To a List
     cleaned_valid_data.append(cleaned_employee_info)
 
+
+logger.info(f"Data cleaning completed. Cleaned records: {len(cleaned_valid_data)}")
 
 print("\n================ CLEANED VALID RECORDS ================\n")
 
@@ -324,28 +342,48 @@ kpi_data=kpi_mapping(cleaned_valid_data)
 department_analytics_data=department_analytics_mapping(cleaned_valid_data)
 
 #Highest Paid Employees
-highest_paid_employee_data=highest_paid_employee(cleaned_valid_data)
+highest_paid_employee_data=highest_paid_employee(
+    cleaned_valid_data,
+    kpi_data
+)
 
 #Least Paid Employees
-lowest_paid_employee_data=lowest_paid_employee(cleaned_valid_data)
+lowest_paid_employee_data=lowest_paid_employee(
+    cleaned_valid_data,
+    kpi_data
+)
 
 #Most Experienced Employee
-most_experienced_employee_data=most_experienced_employee(cleaned_valid_data)
+most_experienced_employee_data=most_experienced_employee(
+    cleaned_valid_data,
+    kpi_data
+)
 
 #Least Experienced Employee
-least_experienced_employee_data=least_experienced_employee(cleaned_valid_data)
+least_experienced_employee_data=least_experienced_employee(
+    cleaned_valid_data,
+    kpi_data
+)
 
 #Department With Highest Average Salary
-department_with_highest_average_salary_data=department_with_highest_average_salary(cleaned_valid_data)
+department_with_highest_average_salary_data=department_with_highest_average_salary(
+    department_analytics_data
+)
 
 #Department With Lowest Average Salary
-department_with_lowest_average_salary_data=department_with_lowest_average_salary(cleaned_valid_data)
+department_with_lowest_average_salary_data=department_with_lowest_average_salary(
+    department_analytics_data
+)
 
 #Department with Most Employees
-department_with_most_employees_data=department_with_most_employees(cleaned_valid_data)
+department_with_most_employees_data=department_with_most_employees(
+    department_analytics_data
+)
 
 #Department with Least Employees
-department_with_least_employees_data=department_with_least_employees(cleaned_valid_data)
+department_with_least_employees_data=department_with_least_employees(
+    department_analytics_data
+)
 
 #Salary Distribution Analytics
 salary_distribution_analytics_data=salary_distribution_analytics(cleaned_valid_data,30000,90000)
@@ -355,7 +393,7 @@ salary_distribution_analytics_data=salary_distribution_analytics(cleaned_valid_d
 def analytics_report():
    
    
-   global_kpi_analytics = kpi_mapping(cleaned_valid_data)
+   global_kpi_analytics = kpi_data
    
    print("=========================\n")
 
@@ -372,7 +410,7 @@ def analytics_report():
 
    print("=========================\n")
 
-   department_analytics_insights=department_analytics_mapping(cleaned_valid_data) 
+   department_analytics_insights = department_analytics_data 
 
   
 
@@ -392,7 +430,10 @@ def analytics_report():
    print("=========================\n")
 
    #Highest Paid Employees
-   highest_paid_employee_data=highest_paid_employee(cleaned_valid_data)
+   highest_paid_employee_data=highest_paid_employee(
+    cleaned_valid_data,
+    kpi_data
+)
 
    print("Highest Paid Employee : ")
    for emp in highest_paid_employee_data:
@@ -400,21 +441,30 @@ def analytics_report():
    
    print("\n")
    #Least Paid Employees
-   lowest_paid_employee_data=lowest_paid_employee(cleaned_valid_data)
+   lowest_paid_employee_data=lowest_paid_employee(
+    cleaned_valid_data,
+    kpi_data
+)
    print("Lowest Paid Employee : ")
    for emp in lowest_paid_employee_data:
        print(emp)
    print("\n")
 
    #Most Experienced Employee
-   most_experienced_employee_data=most_experienced_employee(cleaned_valid_data)
+   most_experienced_employee_data=most_experienced_employee(
+    cleaned_valid_data,
+    kpi_data
+)
    print("Most Experienced Employee : ")
    for emp in most_experienced_employee_data:
        print(emp)
    print("\n")
 
    #Least Experienced Employee
-   least_experienced_employee_data=least_experienced_employee(cleaned_valid_data)
+   least_experienced_employee_data=least_experienced_employee(
+    cleaned_valid_data,
+    kpi_data
+)
    print("Least Experienced Employee : ")
    for emp in least_experienced_employee_data:
        print(emp)
@@ -428,21 +478,23 @@ def analytics_report():
    print("=========================\n")
 
    #Department With Highest Average Salary
-   department_with_highest_average_salary_data=department_with_highest_average_salary(cleaned_valid_data)
+   department_with_highest_average_salary_data=department_with_highest_average_salary(
+    department_analytics_data
+)
    print("Department With Highest Average Salary : ")
    for department in department_with_highest_average_salary_data:
        print(department)
    print("\n")
 
    #Department With Lowest Average Salary
-   department_with_lowest_average_salary_data=department_with_lowest_average_salary(cleaned_valid_data)
+   department_with_lowest_average_salary_data=department_with_lowest_average_salary(department_analytics_data)
    print("Department With Lowest Average Salary : ")
    for department in department_with_lowest_average_salary_data:
        print(department)
 
    print("\n")
    #Department with Most Employees
-   department_with_most_employees_data=department_with_most_employees(cleaned_valid_data)
+   department_with_most_employees_data=department_with_most_employees(department_analytics_data)
    print("Department With Most Employees : ")
    for department in department_with_most_employees_data:
        print(department)
@@ -450,7 +502,7 @@ def analytics_report():
    print("\n")
 
    #Department with Least Employees
-   department_with_least_employees_data=department_with_least_employees(cleaned_valid_data)
+   department_with_least_employees_data=department_with_least_employees(department_analytics_data)
    print("Department With Least Employees : ")
    for department in department_with_least_employees_data:
        print(department)
@@ -471,24 +523,32 @@ def analytics_report():
 
    print("\n")
 
-try:
-
+try:    
+    logger.info("Analytics report generation started")
     analytics_report()
+    logger.info("Analytics report generated successfully")
 
 except InvalidDatasetError as e:
+    logger.error(f"Dataset Error: {e}")
     print(f"Dataset Error : {e}")
 
 except InvalidRangeError as e:
+    logger.error(f"Range Error: {e}")
     print(f"Range Error : {e}")
 
 except InvalidInputError as e:
+    logger.error(f"Input Error: {e}")
     print(f"Input Error : {e}")
 
 except Exception as e:
+    logger.critical(
+    f"Unexpected application failure: {e}"
+)
     print(f"Unexpected Error : {e}")
 
 
 #Sorting and Searching
+logger.info("Sorting and searching operations started")
 sort_by_salary_data=sort_by_salary(cleaned_valid_data,True)
 sort_by_name_data=sort_by_name(cleaned_valid_data,False)
 sort_by_experience_data=sort_by_experience(cleaned_valid_data,False)
@@ -503,10 +563,9 @@ top_n_highest_paid_employees_data=top_n_highest_paid_employees(cleaned_valid_dat
 bottom_n_paid_employees_data=bottom_n_paid_employees(cleaned_valid_data,3)
 top_n_most_experienced_employees_data=top_n_most_experienced_employees(cleaned_valid_data,3)
 
+logger.info("Sorting and searching operations completed")
 
-
-
-
+logger.info("Application finished successfully")
 
 
 

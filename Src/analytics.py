@@ -1,5 +1,7 @@
 from exceptions import InvalidDatasetError, InvalidInputError, InvalidRangeError
-
+import logging
+from logger_config import *
+logger = logging.getLogger(__name__)
 
 def department_employee_count(employee):
     hashmap=dict()
@@ -39,6 +41,8 @@ def department_experience_mapping(employee):
 
 def kpi_mapping(employee):
 
+    logger.info("KPI mapping started")
+
     hashmap=dict()
     
     total_employees=len(employee)
@@ -46,6 +50,7 @@ def kpi_mapping(employee):
     total_salary=0
     total_experience=0
     if len(employee)==0:
+        logger.error("KPI mapping failed: Employee dataset is empty")
         raise InvalidDatasetError("Employee Dataset Is Empty")
     empl=employee[0]
     highest_salary=empl['salary']
@@ -78,11 +83,13 @@ def kpi_mapping(employee):
     hashmap['lowest_experience']=lowest_experience
     hashmap['average_salary']=average_salary
     hashmap['average_experience']=average_experience
+    logger.info(f"KPI mapping completed. Total Employees: {total_employees}")
     return hashmap
 
 def department_analytics_mapping(employee):
-
+    logger.info("Department analytics mapping started")
     if len(employee)==0:
+        logger.error("Department analytics mapping failed: Employee dataset is empty")
         raise InvalidDatasetError("Employee DataSet is Empty")
 
     department_wise_employee_count=department_employee_count(employee)
@@ -132,32 +139,39 @@ def department_analytics_mapping(employee):
         hashmap[department].update({'highest_salary':department_wise_highest_salary[department]})
         hashmap[department].update({'lowest_salary':department_wise_lowest_salary[department]})
         hashmap[department].update({'average_experience':department_wise_average_experience[department]})
-
+    logger.info(f"Department analytics mapping completed. Departments Analyzed: {len(hashmap)}")
     return hashmap
 
 
-def highest_paid_employee(employee):
-    kpi_data=kpi_mapping(employee)
-    highest_paid_employee=[emp for emp in employee  if emp['salary']==kpi_data['highest_salary']]
-    return highest_paid_employee
+def highest_paid_employee(employee, kpi_data):
+    return [
+        emp
+        for emp in employee
+        if emp['salary'] == kpi_data['highest_salary']
+    ]
 
-def lowest_paid_employee(employee):
-    kpi_data=kpi_mapping(employee)
-    lowest_paid_employee=[emp for emp in employee  if emp['salary']==kpi_data['lowest_salary']]
-    return lowest_paid_employee
+def lowest_paid_employee(employee, kpi_data):
+    return [
+        emp
+        for emp in employee
+        if emp['salary'] == kpi_data['lowest_salary']
+    ]
 
-def most_experienced_employee(employee):
-    kpi_data=kpi_mapping(employee)
-    most_experienced_employee=[emp for emp in employee  if emp['experience']==kpi_data['highest_experience']]
-    return most_experienced_employee
+def most_experienced_employee(employee, kpi_data):
+    return [
+        emp
+        for emp in employee
+        if emp['experience'] == kpi_data['highest_experience']
+    ]
 
-def least_experienced_employee(employee):
-    kpi_data=kpi_mapping(employee)
-    least_experienced_employee=[emp for emp in employee  if emp['experience']==kpi_data['lowest_experience']]
-    return least_experienced_employee
+def least_experienced_employee(employee, kpi_data):
+    return [
+        emp
+        for emp in employee
+        if emp['experience'] == kpi_data['lowest_experience']
+    ]
 
-def department_with_highest_average_salary(employee):
-    department_insights=department_analytics_mapping(employee)
+def department_with_highest_average_salary(department_insights):
     highest_average_salary=0
     department_with_highest_average_salary_data=[]
     for key,value in department_insights.items():
@@ -168,8 +182,7 @@ def department_with_highest_average_salary(employee):
             department_with_highest_average_salary_data.append(key)
     return department_with_highest_average_salary_data
 
-def department_with_lowest_average_salary(employee):
-    department_insights=department_analytics_mapping(employee)
+def department_with_lowest_average_salary(department_insights):
     lowest_average_salary=99999999999
     for key,value in department_insights.items():
         if lowest_average_salary>value['average_salary']:
@@ -177,8 +190,7 @@ def department_with_lowest_average_salary(employee):
     department_with_lowest_average_salary_data=[key for key,value in department_insights.items() if value['average_salary']==lowest_average_salary ]
     return department_with_lowest_average_salary_data
 
-def department_with_most_employees(employee):
-    department_insights=department_analytics_mapping(employee)
+def department_with_most_employees(department_insights):
     most_count=0
     for key,value in department_insights.items():
         if most_count<value['employee_count']:
@@ -186,8 +198,7 @@ def department_with_most_employees(employee):
     department_with_most_employees_data=[key for key,value in department_insights.items() if value['employee_count']==most_count]
     return department_with_most_employees_data
 
-def department_with_least_employees(employee):
-    department_insights=department_analytics_mapping(employee)
+def department_with_least_employees(department_insights):
     least_count=99999999999
     for key,value in department_insights.items():
         if least_count>value['employee_count']:
@@ -196,11 +207,15 @@ def department_with_least_employees(employee):
     return department_with_least_employees_data
 
 def salary_distribution_analytics(employee,lowsalary,highsalary):
+    logger.info(f"Salary distribution analytics started. Low Salary: {lowsalary}, High Salary: {highsalary}")
     if len(employee)==0:
+        logger.error("Salary distribution analytics failed: Dataset is empty")
         raise InvalidDatasetError("DataSet Is Empty")
     if (lowsalary>highsalary):
+        logger.error("Salary distribution analytics failed: Low salary exceeds high salary")
         raise InvalidInputError("Low Salary is greater than high salary")
     if ((lowsalary<=0) or (highsalary<=0)):
+        logger.error("Salary distribution analytics failed: Negative salary range")
         raise InvalidRangeError("Salary cannot be negative")
 
     hashmap=dict()
@@ -214,6 +229,9 @@ def salary_distribution_analytics(employee,lowsalary,highsalary):
             hashmap['mid_salary_employees'].append(emp)
         else:
             hashmap['high_salary_employees'].append(emp)
+    logger.info(
+    f"Salary distribution analytics completed. Low={len(hashmap['low_salary_employees'])}, Mid={len(hashmap['mid_salary_employees'])}, High={len(hashmap['high_salary_employees'])}"
+)
     return hashmap
 
     

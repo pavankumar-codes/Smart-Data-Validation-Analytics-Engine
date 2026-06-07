@@ -1,7 +1,9 @@
 # =========================
 # validator.py
 # =========================
-from logger_config import logger
+import logging
+from logger_config import *
+logger = logging.getLogger(__name__)
 
 def validate_name(name):
 
@@ -14,6 +16,8 @@ def validate_name(name):
 
     # Remove Spaces
     name = name.strip()
+
+    name=name.replace(" ", "")
 
     # Empty Validation
     if name == "":
@@ -256,11 +260,14 @@ def validate_department(department):
 
     # Domain Validation
     valid_departments = {
-
-        "HR",
-        "IT",
-        "SALES",
-        "FINANCE"
+    "HR",
+    "IT",
+    "SALES",
+    "FINANCE",
+    "MARKETING",
+    "OPERATIONS",
+    "SUPPORT",
+    "MANAGEMENT"
     }
 
     if department not in valid_departments:
