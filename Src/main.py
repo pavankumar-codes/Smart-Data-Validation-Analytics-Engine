@@ -7,6 +7,7 @@ import csv
 from exceptions import InvalidDatasetError, InvalidInputError, InvalidRangeError
 import logging
 from logger_config import *
+from report_generator import generate_cleaned_valid_data_report, generate_global_kpi_report, generate_invalid_data_report
 from sorting_searching import (
     bottom_n_paid_employees,
     multi_key_sort_department_experience, 
@@ -89,6 +90,7 @@ try:
 
 except FileNotFoundError as e:
     logger.error(f"Failed to read employee data file: {e}")
+    raise
 
 
 logger.info("Starting employee data validation")
@@ -564,6 +566,35 @@ bottom_n_paid_employees_data=bottom_n_paid_employees(cleaned_valid_data,3)
 top_n_most_experienced_employees_data=top_n_most_experienced_employees(cleaned_valid_data,3)
 
 logger.info("Sorting and searching operations completed")
+
+#Report Generation
+try:
+    print("Started Generating cleaned valid data report")
+    logger.info("Started Generating cleaned valid data report")
+    generate_cleaned_valid_data_report(cleaned_valid_data)
+    logger.info("Generated cleaned valid data report")
+    print("Generated cleaned valid data report")
+
+    print("Started Generating cleaned Invalid data report")
+    logger.info("Started Generating cleaned Invalid data report")
+    generate_invalid_data_report(invalid_data)
+    logger.info("Generated Invalid data report")
+    print("Generated Invalid data report")
+
+
+    print("Started Generating Global KPI report")
+    logger.info("Started Generating Global KPI report")
+    generate_global_kpi_report(kpi_data)
+    logger.info("Generated Global KPI report")
+    print("Generated Global KPI report")
+
+
+except InvalidDatasetError as e:
+    logger.error(f"Failed to generate cleaned valid data report: {e}")
+    print(f"Dataset Error: {e}")
+except Exception as e:
+    logger.critical(f"Unexpected error while generating cleaned valid data report: {e}")
+    print(f"Unexpected Error: {e}")
 
 logger.info("Application finished successfully")
 
