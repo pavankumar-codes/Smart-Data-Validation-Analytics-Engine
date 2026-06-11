@@ -7,7 +7,7 @@ import csv
 from exceptions import InvalidDatasetError, InvalidInputError, InvalidRangeError
 import logging
 from logger_config import *
-from report_generator import generate_cleaned_valid_data_report, generate_global_kpi_report, generate_invalid_data_report
+from report_generator import generate_business_insights_report, generate_cleaned_valid_data_report, generate_department_analytics_report, generate_department_insights_report, generate_executive_summary_report, generate_global_kpi_report, generate_invalid_data_report, generate_salary_distribution_analytics_report
 from sorting_searching import (
     bottom_n_paid_employees,
     multi_key_sort_department_experience, 
@@ -587,6 +587,36 @@ try:
     generate_global_kpi_report(kpi_data)
     logger.info("Generated Global KPI report")
     print("Generated Global KPI report")
+
+    print("Started Generating Department Analytics report")
+    logger.info("Started Generating Department Analytics report")
+    generate_department_analytics_report(department_analytics_data)
+    logger.info("Generated Department Analytics report")
+    print("Generated Global Department Analytics report")
+
+    print("Started Generating Business Insights report")
+    logger.info("Started Generating Business Insights report")
+    generate_business_insights_report(highest_paid_employee_data,lowest_paid_employee_data,most_experienced_employee_data,least_experienced_employee_data)
+    logger.info("Generated Business Insights report")
+    print("Generated Global Business Insights report")
+
+    print("Started Generating Department Insights report")
+    logger.info("Started Generating Department Insights report")
+    generate_department_insights_report(department_with_highest_average_salary_data,department_with_lowest_average_salary_data,department_with_most_employees_data,department_with_least_employees_data)
+    logger.info("Generated Department Insights report")
+    print("Generated Global Business Insights report")
+
+    print("Started Generating Salary Distribution Analytics report")
+    logger.info("Started Generating Salary Distribution Analytics report")
+    generate_salary_distribution_analytics_report(salary_distribution_analytics_data)
+    logger.info("Generated Salary Distribution Analytics report")
+    print("Generated Global Salary Distribution Analytics report")
+
+    print("Started Generating Executive Summary report")
+    logger.info("Started Generating Executive Summary report")
+    generate_executive_summary_report(valid_data,invalid_data,kpi_data,department_analytics_data)
+    logger.info("Generated Executive Summary report")
+    print("Generated Executive Summary report")
 
 
 except InvalidDatasetError as e:

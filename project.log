@@ -1,27 +1,37 @@
-2026-06-09 03:25:04,732 -  INFO - __main__ -  Reading employee data from: C:\20LPA\Smart-Data-Validation-Analytics-Engine\Data\1_Raw_Data\employees.csv
-2026-06-09 03:25:04,733 -  INFO - __main__ -  Employee data loaded successfully. Records loaded: 41
-2026-06-09 03:25:04,733 -  INFO - __main__ -  Starting employee data validation
-2026-06-09 03:25:04,733 -  INFO - validator -  Starting duplicate employee ID validation
-2026-06-09 03:25:04,733 -  WARNING - validator -  Duplicate employee IDs detected. Count: 1
-2026-06-09 03:25:04,738 -  INFO - __main__ -  Validation completed. Valid Records: 29, Invalid Records: 12
-2026-06-09 03:25:04,738 -  INFO - __main__ -  Starting data cleaning for valid records
-2026-06-09 03:25:04,739 -  INFO - __main__ -  Data cleaning completed. Cleaned records: 29
-2026-06-09 03:25:04,743 -  INFO - analytics -  KPI mapping started
-2026-06-09 03:25:04,744 -  INFO - analytics -  KPI mapping completed. Total Employees: 29
-2026-06-09 03:25:04,744 -  INFO - analytics -  Department analytics mapping started
-2026-06-09 03:25:04,744 -  INFO - analytics -  Department analytics mapping completed. Departments Analyzed: 6
-2026-06-09 03:25:04,744 -  INFO - analytics -  Salary distribution analytics started. Low Salary: 30000, High Salary: 90000
-2026-06-09 03:25:04,744 -  INFO - analytics -  Salary distribution analytics completed. Low=1, Mid=22, High=6
-2026-06-09 03:25:04,744 -  INFO - __main__ -  Analytics report generation started
-2026-06-09 03:25:04,748 -  INFO - analytics -  Salary distribution analytics started. Low Salary: 30000, High Salary: 90000
-2026-06-09 03:25:04,748 -  INFO - analytics -  Salary distribution analytics completed. Low=1, Mid=22, High=6
-2026-06-09 03:25:04,750 -  INFO - __main__ -  Analytics report generated successfully
-2026-06-09 03:25:04,750 -  INFO - __main__ -  Sorting and searching operations started
-2026-06-09 03:25:04,750 -  INFO - __main__ -  Sorting and searching operations completed
-2026-06-09 03:25:04,750 -  INFO - __main__ -  Started Generating cleaned valid data report
-2026-06-09 03:25:04,760 -  INFO - __main__ -  Generated cleaned valid data report
-2026-06-09 03:25:04,760 -  INFO - __main__ -  Started Generating cleaned Invalid data report
-2026-06-09 03:25:04,767 -  INFO - __main__ -  Generated Invalid data report
-2026-06-09 03:25:04,767 -  INFO - __main__ -  Started Generating Global KPI report
-2026-06-09 03:25:04,773 -  INFO - __main__ -  Generated Global KPI report
-2026-06-09 03:25:04,774 -  INFO - __main__ -  Application finished successfully
+2026-06-12 01:12:46,740 -  INFO - __main__ -  Reading employee data from: C:\20LPA\Smart-Data-Validation-Analytics-Engine\Data\1_Raw_Data\employees.csv
+2026-06-12 01:12:46,740 -  INFO - __main__ -  Employee data loaded successfully. Records loaded: 41
+2026-06-12 01:12:46,740 -  INFO - __main__ -  Starting employee data validation
+2026-06-12 01:12:46,740 -  INFO - validator -  Starting duplicate employee ID validation
+2026-06-12 01:12:46,740 -  WARNING - validator -  Duplicate employee IDs detected. Count: 1
+2026-06-12 01:12:46,746 -  INFO - __main__ -  Validation completed. Valid Records: 29, Invalid Records: 12
+2026-06-12 01:12:46,746 -  INFO - __main__ -  Starting data cleaning for valid records
+2026-06-12 01:12:46,746 -  INFO - __main__ -  Data cleaning completed. Cleaned records: 29
+2026-06-12 01:12:46,751 -  INFO - analytics -  KPI mapping started
+2026-06-12 01:12:46,751 -  INFO - analytics -  KPI mapping completed. Total Employees: 29
+2026-06-12 01:12:46,751 -  INFO - analytics -  Department analytics mapping started
+2026-06-12 01:12:46,751 -  INFO - analytics -  Department analytics mapping completed. Departments Analyzed: 6
+2026-06-12 01:12:46,751 -  INFO - analytics -  Salary distribution analytics started. Low Salary: 30000, High Salary: 90000
+2026-06-12 01:12:46,751 -  INFO - analytics -  Salary distribution analytics completed. Low=1, Mid=22, High=6
+2026-06-12 01:12:46,751 -  INFO - __main__ -  Analytics report generation started
+2026-06-12 01:12:46,756 -  INFO - analytics -  Salary distribution analytics started. Low Salary: 30000, High Salary: 90000
+2026-06-12 01:12:46,756 -  INFO - analytics -  Salary distribution analytics completed. Low=1, Mid=22, High=6
+2026-06-12 01:12:46,757 -  INFO - __main__ -  Analytics report generated successfully
+2026-06-12 01:12:46,757 -  INFO - __main__ -  Sorting and searching operations started
+2026-06-12 01:12:46,757 -  INFO - __main__ -  Sorting and searching operations completed
+2026-06-12 01:12:46,757 -  INFO - __main__ -  Started Generating cleaned valid data report
+2026-06-12 01:12:46,767 -  INFO - __main__ -  Generated cleaned valid data report
+2026-06-12 01:12:46,768 -  INFO - __main__ -  Started Generating cleaned Invalid data report
+2026-06-12 01:12:46,775 -  INFO - __main__ -  Generated Invalid data report
+2026-06-12 01:12:46,775 -  INFO - __main__ -  Started Generating Global KPI report
+2026-06-12 01:12:46,781 -  INFO - __main__ -  Generated Global KPI report
+2026-06-12 01:12:46,781 -  INFO - __main__ -  Started Generating Department Analytics report
+2026-06-12 01:12:46,788 -  INFO - __main__ -  Generated Department Analytics report
+2026-06-12 01:12:46,788 -  INFO - __main__ -  Started Generating Business Insights report
+2026-06-12 01:12:46,794 -  INFO - __main__ -  Generated Business Insights report
+2026-06-12 01:12:46,795 -  INFO - __main__ -  Started Generating Department Insights report
+2026-06-12 01:12:46,801 -  INFO - __main__ -  Generated Department Insights report
+2026-06-12 01:12:46,801 -  INFO - __main__ -  Started Generating Salary Distribution Analytics report
+2026-06-12 01:12:46,814 -  INFO - __main__ -  Generated Salary Distribution Analytics report
+2026-06-12 01:12:46,814 -  INFO - __main__ -  Started Generating Executive Summary report
+2026-06-12 01:12:46,821 -  INFO - __main__ -  Generated Executive Summary report
+2026-06-12 01:12:46,821 -  INFO - __main__ -  Application finished successfully
